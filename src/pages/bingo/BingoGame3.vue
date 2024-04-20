@@ -170,10 +170,24 @@ export default {
     this.wordChange();
     console.log(this.wordList);
   },
+  computed: {
+    computedImgDatas() {
+      return JSON.parse(JSON.stringify(this.imgDatas));
+    },
+  },
   watch: {
-    imgDatas: {
-      handler: function () {
-        if (this.bingoRoot()) {
+    computedImgDatas: {
+      handler: function (newImgs, oldImgs) {
+        console.log('判定前');
+        let changeId = 0;
+        for (const newImg of newImgs) {
+          if (newImg.name !== oldImgs[newImg.id - 1].name) {
+            console.log(newImg.id);
+            changeId = newImg;
+            break; // 不要なループ省略のため
+          }
+        }
+        if (this.bingoRoot(changeId)) {
           if (this.checker) {
             console.log('ビンゴ過ぎた');
             return (this.checker = 'out');
@@ -198,7 +212,7 @@ export default {
         return 'right-ans';
       }
       if (id == 8) {
-        return 'btn-ans';
+        return 'btm-ans';
       }
     },
     randomImg2(imgData) {
@@ -215,7 +229,6 @@ export default {
         // console.log(imgData.name); 答え
         imgData.src = `src/local_images/${this.wordList[1]}${randomNum}.jpg`;
       }
-      console.log(imgData);
     },
     wordChange() {
       if (this.modeWord == 'cabbage') {
@@ -245,27 +258,24 @@ export default {
           `src/local_images/${this.wordList[1]}${randomNum}.jpg`;
       }
     },
-    bingoRoot() {
+    bingoRoot(changeImg) {
       const i = this.imgDatas;
-      const c = this.wordList[0];
-      const l = this.wordList[1];
+      let word = '';
+      // ワード判定
+      if (changeImg.name == this.wordList[0]) {
+        word = this.wordList[0];
+      } else {
+        word = this.wordList[1];
+      }
       if (
-        (i[0].name == c && i[7].name == c) ||
-        (i[2].name == c && i[5].name == c) ||
-        (i[3].name == c && i[4].name == c) ||
-        (i[1].name == c && i[6].name == c) ||
-        (i[0].name == l && i[7].name == l) ||
-        (i[2].name == l && i[5].name == l) ||
-        (i[3].name == l && i[4].name == l) ||
-        (i[1].name == l && i[6].name == l) ||
-        (i[0].name == c && i[1].name == c && i[2].name == c) ||
-        (i[5].name == c && i[6].name == c && i[7].name == c) ||
-        (i[0].name == c && i[3].name == c && i[5].name == c) ||
-        (i[2].name == c && i[4].name == c && i[7].name == c) ||
-        (i[0].name == l && i[1].name == l && i[2].name == l) ||
-        (i[5].name == l && i[6].name == l && i[7].name == l) ||
-        (i[0].name == l && i[3].name == l && i[5].name == l) ||
-        (i[2].name == l && i[4].name == l && i[7].name == l)
+        (i[0].name == word && i[8].name == word) ||
+        (i[2].name == word && i[6].name == word) ||
+        (i[3].name == word && i[4].name == word) ||
+        (i[1].name == word && i[7].name == word) ||
+        (i[0].name == word && i[1].name == word && i[2].name == word) ||
+        (i[6].name == word && i[7].name == word && i[8].name == word) ||
+        (i[0].name == word && i[3].name == word && i[6].name == word) ||
+        (i[2].name == word && i[4].name == word && i[8].name == word)
       ) {
         return true;
       }
