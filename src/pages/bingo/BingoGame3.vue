@@ -5,6 +5,12 @@
     <h2 v-if="ans == 'out'">ビンゴになったのに気づかなかった！不正解！</h2>
     <h2 v-if="ans == true">正解！</h2>
     <h2 v-if="ans == false">不正解...</h2>
+    <div>
+      <v-btn v-if="imgDisp" @click="reload()" class="reload"
+        >もう一度プレイ</v-btn
+      >
+      <router-link to="/bingoRule" v-if="imgDisp">戻る</router-link>
+    </div>
   </div>
   <div class="squares">
     <div v-for="imgData in imgDatas" :key="imgData.id">
@@ -14,7 +20,7 @@
       >
         {{ imgData.name }}
       </p>
-      <img v-if="!(imgData.src == '')" :src="imgData.src" width="240px" />
+      <img v-if="!(imgData.src == '')" :src="imgData.src" class="imgs" />
       <v-btn
         v-if="imgData.src == ''"
         @click="randomImg2(imgData)"
@@ -24,116 +30,10 @@
       >
     </div>
   </div>
-  <div class="back">
-    <v-btn v-if="imgDisp" @click="reload()" class="reload"
-      >もう一度プレイ</v-btn
-    >
-    <router-link to="/bingoRule" v-if="imgDisp">戻る</router-link>
-  </div>
-  <div class="full-image-wrap" v-if="fullImage">
+  <!-- <div class="full-image-wrap" v-if="fullImage">
     <v-btn v-if="fullImage" @click="close">閉じる</v-btn>
     <img class="full-image" :src="fullImageSrc" />
-  </div>
-  <!-- <div class="squares">
-    <div>
-      <p v-if="imgDisp" class="left-ans">{{ this.imgDatas[0].name }}</p>
-      <img :src="imgDatas[0].src" width="240px" @click="imageClick(0)" />
-      <v-btn
-        v-if="this.imgDatas[0].src == ''"
-        @click="randomImg(0)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <p v-if="imgDisp" class="top-ans">{{ this.imgDatas[1].name }}</p>
-      <img :src="imgDatas[1].src" width="240px" @click="imageClick(1)" />
-      <v-btn
-        v-if="this.imgDatas[1].src == ''"
-        @click="randomImg(1)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <p v-if="imgDisp" class="right-ans">{{ this.imgDatas[2].name }}</p>
-      <img :src="imgDatas[2].src" width="240px" @click="imageClick(2)" />
-      <v-btn
-        v-if="this.imgDatas[2].src == ''"
-        @click="randomImg(2)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <p v-if="imgDisp" class="left-ans">{{ this.imgDatas[3].name }}</p>
-      <img :src="imgDatas[3].src" width="240px" @click="imageClick(3)" />
-      <v-btn
-        v-if="this.imgDatas[3].src == ''"
-        @click="randomImg(3)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <img src="../../local_images/free_icon.png" width="240px" />
-    </div>
-    <div>
-      <p v-if="imgDisp" class="right-ans">{{ this.imgDatas[4].name }}</p>
-      <img :src="imgDatas[4].src" width="240px" @click="imageClick(4)" />
-      <v-btn
-        v-if="this.imgDatas[4].src == ''"
-        @click="randomImg(4)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <p v-if="imgDisp" class="left-ans">{{ this.imgDatas[5].name }}</p>
-      <img :src="imgDatas[5].src" width="240px" @click="imageClick(5)" />
-      <v-btn
-        v-if="this.imgDatas[5].src == ''"
-        @click="randomImg(5)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
-    <div>
-      <img :src="imgDatas[6].src" width="240px" @click="imageClick(6)" />
-      <v-btn
-        v-if="this.imgDatas[6].src == ''"
-        @click="randomImg(6)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-      <p v-if="imgDisp" class="btm-ans">{{ this.imgDatas[6].name }}</p>
-    </div>
-    <div>
-      <p v-if="imgDisp" class="right-ans">{{ this.imgDatas[7].name }}</p>
-      <img :src="imgDatas[7].src" width="240px" @click="imageClick(7)" />
-      <v-btn
-        v-if="this.imgDatas[7].src == ''"
-        @click="randomImg(7)"
-        width="240px"
-        height="240px"
-        >押してね</v-btn
-      >
-    </div>
   </div> -->
-  <!-- <p class="loading">{{ load }}</p> -->
-  <!-- <img
-    :src="imgData.src"
-    v-for="imgData in imgDatas"
-    :key="imgData.id"
-    width="300px"
-    /> -->
 </template>
 
 <script>
@@ -178,7 +78,6 @@ export default {
   watch: {
     computedImgDatas: {
       handler: function (newImgs, oldImgs) {
-        console.log('判定前');
         let changeId = 0;
         for (const newImg of newImgs) {
           if (newImg.name !== oldImgs[newImg.id - 1].name) {
@@ -205,7 +104,7 @@ export default {
       if (id == 1 || id == 4 || id == 7) {
         return 'left-ans';
       }
-      if ((id == 2, id == 5)) {
+      if (id == 2) {
         return 'center-ans';
       }
       if (id == 3 || id == 6 || id == 9) {
@@ -362,6 +261,11 @@ export default {
   margin: 40px;
   font-size: 32px;
 }
+.imgs {
+  width: 240px;
+  height: 240px;
+  overflow: hidden;
+}
 .back {
   margin: 32px;
   font-size: 24px;
@@ -387,7 +291,7 @@ export default {
   display: grid;
   grid-template-columns: 240px;
 }
-.senter-btn {
+.center-btn {
   display: grid;
   grid-template-columns: 0 240px;
 }
@@ -412,10 +316,10 @@ export default {
   position: absolute; /* 相対位置指定 */
   left: 360px;
 }
-.top-ans {
+.center-ans {
   position: absolute;
-  top: 388px;
-  left: 728px;
+  left: 740px;
+  top: 360px;
 }
 .right-ans {
   position: absolute;
@@ -423,8 +327,8 @@ export default {
 }
 .btm-ans {
   position: absolute;
-  top: 1144px;
-  left: 728px;
+  top: 1120px;
+  left: 748px;
 }
 .tes {
   width: 240px;
