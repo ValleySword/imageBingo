@@ -45,12 +45,15 @@ class ImagesSearch:
             f"{keyword}" if "" else keyword,
             start_index
         )
+
+
         # 画像を一枚に絞るための処理？
         link = random.choice(link_list)
         image = self.google_image.get_image(link)
 
-        # 画像1枚（ローカル保存処理をする場合はコメントアウト）
+        # # 画像1枚（ローカル保存処理をする場合はコメントアウト）
         return image
+
 
         # jImage = cv2.imencode(".jpg", image)
         # img = cv2.imread(image)
