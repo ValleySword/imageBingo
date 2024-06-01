@@ -1,6 +1,5 @@
 <template>
   <v-btn class="bingo-btn" @click="bingoCheck()">ビンゴ！</v-btn>
-  <!-- <v-btn>ビンゴにならなかった！</v-btn> -->
   <div class="answer">
     <h2 v-if="ans == 'out'">ビンゴになったのに気づかなかった！不正解！</h2>
     <h2 v-if="ans == true">正解！</h2>
@@ -14,13 +13,25 @@
   </div>
   <div class="squares">
     <div v-for="imgData in imgDatas" :key="imgData.id">
-      <p
-        v-if="imgDisp && imgData.name && !(imgData.id == 5)"
-        :class="com(imgData.id)"
-      >
-        {{ imgData.name }}
+      <p v-if="imgDisp && imgData.name && !(imgData.id == 5)">
+        <span
+          :class="{
+            'imgs-name-hover': hoverFlag && !(imgData.id == 5),
+            'imgs-name': !hoverFlag,
+          }"
+          >{{ imgData.name }}</span
+        >
       </p>
-      <img v-if="!(imgData.src == '')" :src="imgData.src" class="imgs" />
+      <img
+        v-if="!(imgData.src == '')"
+        :src="imgData.src"
+        :class="{
+          imgs: !imgDisp || hoverFlag || imgData.id == 5,
+          'imgs-clear': imgDisp && !hoverFlag && !(imgData.id == 5),
+        }"
+        @mouseover="hoverOn"
+        @mouseleave="hoverOff"
+      />
       <v-btn
         v-if="imgData.src == ''"
         @click="randomImg2(imgData)"
@@ -62,6 +73,7 @@ export default {
       imgDisp: false,
       ans: null,
       btnChecker: false,
+      hoverFlag: false,
     };
   },
   mounted() {
@@ -99,20 +111,17 @@ export default {
     },
   },
   methods: {
-    // マス目のv-forに適応してたが、squaresを使ってみたら上手くいった
-    com(id) {
-      if (id == 1 || id == 4 || id == 7) {
-        return 'left-ans';
+    hoverOn() {
+      if (!this.imgDisp) {
+        return;
       }
-      if (id == 2) {
-        return 'center-ans';
+      this.hoverFlag = true;
+    },
+    hoverOff() {
+      if (!this.imgDisp) {
+        return;
       }
-      if (id == 3 || id == 6 || id == 9) {
-        return 'right-ans';
-      }
-      if (id == 8) {
-        return 'btm-ans';
-      }
+      this.hoverFlag = false;
     },
     randomImg2(imgData) {
       let randomNum = Math.floor(Math.random() * 100);
@@ -262,9 +271,25 @@ export default {
   font-size: 32px;
 }
 .imgs {
+  position: relative;
   width: 240px;
   height: 240px;
   overflow: hidden;
+}
+.imgs-clear {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  overflow: hidden;
+  opacity: 0.3;
+}
+.imgs-name {
+  position: absolute;
+  z-index: 1;
+  color: rgb(100, 0, 255);
+}
+.imgs-name-hover {
+  position: absolute;
 }
 .back {
   margin: 32px;
