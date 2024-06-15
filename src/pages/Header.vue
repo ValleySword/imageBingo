@@ -1,6 +1,7 @@
 <template>
   <header>
-    <router-link to="/bingoRule">見極めゲーム</router-link>
+    <router-link to="/">ホーム</router-link>
+    <router-link to="/bingoRule">ビンゴゲーム</router-link>
     <router-link to="/search">画像検索</router-link>
   </header>
 </template>
