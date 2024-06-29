@@ -34,7 +34,7 @@
         <div class="app">
           <img src="../local_images/ai_talk_ai.png" alt="その他のアプリ" />
           <h3 class="others">その他のアプリ</h3>
-          <p>今後追加予定のアプリはこちら</p>
+          <p>今後追加予定？</p>
         </div>
       </div>
     </div>
