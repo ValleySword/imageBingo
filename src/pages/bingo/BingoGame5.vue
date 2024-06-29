@@ -114,14 +114,12 @@ export default {
             break; // 不要なループ省略のため
           }
         }
-        if (this.bingoRoot(changeId)) {
-          if (this.checker) {
-            console.log('ビンゴ過ぎた');
-            return (this.checker = 'out');
-          }
-          this.checker = true;
-          console.log('今ビンゴ');
+        if (this.checker) {
+          console.log('ビンゴ過ぎた');
+          return (this.checker = 'out');
         }
+        this.bingoRoot(changeId);
+        // console.log('今ビンゴ');
       },
       deep: true,
     },
@@ -253,9 +251,9 @@ export default {
           i[19].name == word &&
           i[24].name == word)
       ) {
-        return true;
+        console.log('今ビンゴ');
+        this.checker = true;
       }
-      return false;
     },
     imageClick(i) {
       this.fullImageSrc = this.imgDatas[i].src;
