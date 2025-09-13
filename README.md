@@ -1,15 +1,32 @@
-コミットの仕方
+# ビンゴ当てゲーム
+
+マスを押すと2種類の画像が表示されます。
+
+その種類がタテヨコナナメそろったと思ったらビンゴボタンを押して確認。
+
+揃っていたら成功、もしそろっていなかったら失敗。
+
+キャベツとレタスなど、揃っているかどうか見分けづらいものもあるので注意！
+
+# DEMO
+
+"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
+
+# Usage
+
+DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+
+```bash
+git clone https://github.com/hoge/~
+cd examples
+python demo.py
+```
+
+# コミットの仕方
+忘れてしまわないように、コミット方法を一応記載
 
 1. git add .
    変更内容確認
    git status（vscodeの左のツールバーで確認でもOK）
 2. git commit -m "メッセージ"
 3. git push origin main
-
-# Vue 3 + Vite
-
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
