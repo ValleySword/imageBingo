@@ -14,7 +14,7 @@ googleの画像検索API（Google Custom Search API）を利用して、画像�
 
 APIの使用回数制限があるため、1日100回のみ利用可能
 
-# DEMO
+# デモ
 
 ### ビンゴ当てゲーム
 
@@ -22,7 +22,7 @@ APIの使用回数制限があるため、1日100回のみ利用可能
 
 ### 画像検索機能
 
-# Usage
+# 使用方法
 
 DEMOの実行方法など、"hoge"の基本的な使い方を説明する
 
@@ -40,3 +40,6 @@ python demo.py
    git status（vscodeの左のツールバーで確認でもOK）
 2. git commit -m "メッセージ"
 3. git push origin main
+
+# その他
+作成時期：2024年6月
