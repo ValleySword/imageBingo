@@ -18,9 +18,13 @@ APIの使用回数制限があるため、1日100回のみ利用可能
 
 ### ビンゴ当てゲーム
 
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
+<img width="1519" height="935" alt="スクリーンショット 2025-09-14 104411" src="https://github.com/user-attachments/assets/fcc0bef3-fd94-4160-aea3-c00f9b6bd805" />
+
 
 ### 画像検索機能
+
+<img width="1519" height="936" alt="スクリーンショット 2025-09-14 104102" src="https://github.com/user-attachments/assets/31a41635-88f5-49a7-8a66-3ddf0abd82bd" />
+
 
 # 使用方法
 
@@ -50,11 +54,9 @@ python main.py
 忘れてしまわないように、コミット方法を一応記載
 
 1. git add .
-   変更内容確認
-   git status（vscodeの左のツールバーで確認でもOK）
 2. git commit -m "メッセージ"
 3. git push origin main
 
 # その他
 
-作成時期：2024年4月
+作成時期：2023年12月
