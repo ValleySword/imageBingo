@@ -24,15 +24,29 @@ APIの使用回数制限があるため、1日100回のみ利用可能
 
 # 使用方法
 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+リポジトリのクローン、インストール、起動
 
 ```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
+git clone git@github.com:ValleySword/imageBingo.git
+cd imageBingo
+npm install # 初回のみ
+npm run dev
+# 2025年9月追記：npm run dev実行後、エラーが出ます。
+# 問題なく動作するので、無視して大丈夫です。
+# 現在エラーの原因を調査中です。
+```
+
+画像検索機能の実行方法
+
+```bash
+# ターミナルをもう一つ開く
+# envフォルダのenv.exampleをコピーして、envフォルダの中に.envファイルを作成
+cd src
+python main.py
 ```
 
 # コミットの仕方
+
 忘れてしまわないように、コミット方法を一応記載
 
 1. git add .
@@ -42,4 +56,5 @@ python demo.py
 3. git push origin main
 
 # その他
-作成時期：2024年6月
+
+作成時期：2024年4月
